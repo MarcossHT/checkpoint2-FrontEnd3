@@ -10,6 +10,10 @@
   background-color: #31313196;
 }
 
+.formError {
+  background-color: red;
+}
+
 .inputSpacing+.inputSpacing{
   margin: 1rem 0;
 }

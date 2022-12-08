@@ -15,17 +15,23 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 const routerApp = createBrowserRouter([
   {
     path: '',
-    element: <Home />
-  },
-  {
-    path: 'login',
-    element: <Login />
-  },
-  {
-    path: 'detail',
-    element: <Detail />
-  },
+    element: <Home />,
+    children: [
+      {
+        path: 'home',
+        element: <Home />
+      }
+    ]},
+    {
+      path: 'login',
+      element: <Login />
+    },
+    {
+      path: 'detail',
+      element: <Detail />
+    }
 ])
+
 root.render(
   <React.StrictMode>
     <Navbar />

@@ -14,22 +14,17 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 //Lembre-se de configurar suas rotas e seu contexto aqui
 const routerApp = createBrowserRouter([
   {
-    path: '',
-    element: <Home />,
-    children: [
-      {
-        path: 'home',
-        element: <Home />
-      }
-    ]},
-    {
-      path: 'login',
-      element: <Login />
-    },
-    {
-      path: 'detail',
-      element: <Detail />
-    }
+    path: 'home',
+    element: <Home />
+  },  
+  {
+    path: 'login',
+    element: <Login />
+  },
+  {
+    path: 'detail',
+    element: <Detail />
+  }
 ])
 
 root.render(

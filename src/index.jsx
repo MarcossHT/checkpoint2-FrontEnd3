@@ -7,24 +7,32 @@ import Home from "./Routes/Home";
 import Login from "./Routes/Login";
 import Detail from "./Routes/Detail";
 import Footer from "./Components/Footer";
+import App from "./App";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 //Lembre-se de configurar suas rotas e seu contexto aqui
 const routerApp = createBrowserRouter([
-  {
-    path: 'home',
-    element: <Home />
-  },  
-  {
-    path: 'login',
-    element: <Login />
-  },
-  {
-    path: 'detail',
-    element: <Detail />
-  }
+  
+      {
+        path: '',
+        element: <Navigate to='home'/>
+      }, 
+      {
+        path: 'home',
+        element: <Home />
+      },
+      {
+        path: 'Login',
+        element: <Login />
+      },
+      {
+        path: 'detail/:id',
+        element: <Detail />
+      },
+  
+ 
 ])
 
 root.render(

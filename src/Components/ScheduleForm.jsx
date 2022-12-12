@@ -2,9 +2,34 @@ import { useContext, useEffect, useState } from "react";
 import styles from "./ScheduleForm.module.css";
 
 const ScheduleForm = () => {
+
+  const [dentist, setDentist] = useState([])
+  const [pacient, setPacient] = useState([])
+
   useEffect(() => {
     //Nesse useEffect, você vai fazer um fetch na api buscando TODOS os dentistas
     //e pacientes e carregar os dados em 2 estados diferentes
+
+    fetch('https://dhodonto.ctdprojetos.com.br/dentista').then(
+      response => {
+        response.json().then(
+          data => {
+            setDentist(data)
+          }
+        )
+      }
+    )
+
+    fetch('https://dhodonto.ctdprojetos.com.br/paciente').then(
+      response => {
+        response.json().then(
+          data => {
+            setPacient(data.body)
+          }
+        )
+      }
+    )    
+
   }, []);
 
   const handleSubmit = (event) => {
@@ -19,10 +44,7 @@ const ScheduleForm = () => {
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-      <div
-        className={`text-center container}`
-        }
-      >
+      <div className={`text-center container}`}>
         <form onSubmit={handleSubmit}>
           <div className={`row ${styles.rowSpacing}`}>
             <div className="col-sm-12 col-lg-6">
@@ -30,8 +52,20 @@ const ScheduleForm = () => {
                 Dentist
               </label>
               <select className="form-select" name="dentist" id="dentist">
-                {/*Aqui deve ser feito um map para listar todos os dentistas*/}
-                <option key={'Matricula do dentista'} value={'Matricula do dentista'}>
+                {dentist.map((dentistlist) => {
+                  return (
+                    <option
+                      key={dentistlist.matricula}
+                      value={dentistlist.matricula}
+                    >
+                      {dentistlist.nome} {dentistlist.sobrenome}
+                    </option>
+                  );
+                })}
+                <option
+                  key={"Matricula do dentista"}
+                  value={"Matricula do dentista"}
+                >
                   {`Nome Sobrenome`}
                 </option>
               </select>
@@ -41,8 +75,24 @@ const ScheduleForm = () => {
                 Patient
               </label>
               <select className="form-select" name="patient" id="patient">
-                {/*Aqui deve ser feito um map para listar todos os pacientes*/}
-                <option key={'Matricula do paciente'} value={'Matricula do paciente'}>
+                {
+                pacient.map((pacienteList) => {
+                  return (
+                    <option
+                      key={pacienteList.matricula}
+                      value={pacienteList.matricula}
+                    >
+                      {pacienteList.nome} {pacienteList.sobrenome}
+                    </option>
+                      );
+                
+                    }
+                  )
+                }
+                <option
+                  key={"Matricula do paciente"}
+                  value={"Matricula do paciente"}
+                >
                   {`Nome Sobrenome`}
                 </option>
               </select>
@@ -64,11 +114,7 @@ const ScheduleForm = () => {
           <div className={`row ${styles.rowSpacing}`}>
             {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-            <button
-              className={`btn btn-light ${styles.button
-                }`}
-              type="submit"
-            >
+            <button className={`btn btn-light ${styles.button}`} type="submit">
               Schedule
             </button>
           </div>

@@ -1,16 +1,58 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useAuth } from "../hooks/useAuth"
+import { useTheme } from '../hooks/useTheme'
+
 import styles from "./Form.module.css";
 
 const LoginForm = () => {
 
+  const { theme } = useTheme()
+  const { addToken } = useAuth()
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [token, setToken] = useState('')
-  const [formError, setFormError] = useState(false)
+  const [formError, setFormError] = useState({usernameError: false, passwordError: false, genericError: false})
 
   const navigate = useNavigate()
+
+  const validateUsername = (username) => {
+    setFormError(prevState => ({...prevState, genericError: false}))   
+
+    const withoutSpaces = username.trim()
+  
+    if (withoutSpaces.length >= 5) {
+
+      setFormError(prevState => ({...prevState, usernameError: false}))
+      setUsername(username)
+      return true
+
+    } else {
+
+      setFormError(prevState => ({...prevState, usernameError: true}))
+      return false
+
+    }
+  }
+  
+  const validatePassword = (password) => {
+    setFormError(prevState => ({...prevState, genericError: false}))   
+    
+    if (password.length >= 8) {
+
+      setFormError(prevState => ({...prevState, passwordError: false}))
+      setPassword(password)
+      return true
+
+    } else {
+
+      setFormError(prevState => ({...prevState, passwordError: true}))
+      return false
+
+    }
+
+  }
 
   const handleSubmit = (e) => {
     //Nesse handlesubmit você deverá usar o preventDefault,
@@ -38,65 +80,65 @@ const LoginForm = () => {
       headers: requestHeaders
     }
 
-    try {
+    if(validateUsername && validatePassword) {
 
-      fetch(`http://dhodonto.ctdprojetos.com.br/auth`, requestConfiguration)
-        .then(response => {
-          if(response.status === 200) {            
-            response.json()
-              .then(data => {
-                setToken(data.token)
-                localStorage.setItem('token', data.token)
+      fetch(`https://dhodonto.ctdprojetos.com.br/auth`, requestConfiguration).then(
+        response => {
+          if(response.ok) {            
+            response.json().then(
+              data => {
+                // setFormError(false)
+                addToken(data.token)
+                alert('Login realizado com sucesso!')
                 navigate('/home')
-          })
-            // if (address.erro !== undefined) {
-            //   alert(
-            //     `O Cep: ${cep} não existe ou nao consta na nossa base de dados!`
-            //   )
-            //   setErrorForm(true)
-            // } else {
-            //   setErrorForm(false)
-            //   setLocations([...locations, address])
-            //   useNavigate
-            // }
+              }
+            )
           } else {
-            setFormError(true)
+            setFormError({usernameError: false, passwordError: false, genericError: true})            
             alert('Usuário e/ou senha incorreto(s)!')
           }
-      })
-    } catch (error) {
-      console.log(error)
+        }
+      )
     }
-
-      }
-    // }
-
+  }
 
   return (
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
       <div
-        className={`text-center card container ${styles.card}`}
+        className={`text-center card container ${styles.card} ${theme === 'dark' ? `${styles.cardDark}` : ''} ${formError.genericError ? `${styles.formError}` : ''}`}
       >
-        <div className={`card-body ${styles.CardBody} ${formError ? `${styles.formError}` : ''}`}>
+        <div className={`card-body ${styles.CardBody}`}>
           <form onSubmit={handleSubmit}>
             <input
-              className={`form-control ${styles.inputSpacing}`}
+              className={`form-control ${styles.inputSpacing} ${formError.usernameError ? `${styles.formError}` : ''}`}
               placeholder="Login"
               name="login"
               required
-              onChange={(event) => setUsername(event.target.value)}
+              onChange={(event) => validateUsername(event.target.value)}
             />
+
+            {
+              formError.usernameError && 
+              <span className={`${styles.formError}`}>O nome de usuário deve conter pelo menos 5 caracteres</span>
+            }
+
             <input
-              className={`form-control ${styles.inputSpacing}`}
+              className={`form-control ${styles.inputSpacing} ${formError.passwordError ? `${styles.formError}` : ''}`}
               placeholder="Password"
               name="password"
               type="password"
               required
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={(event) => validatePassword(event.target.value)}
             />
-            <button className="btn btn-primary" type="submit" onClick={(event) => handleSubmit(event)}>
+
+            {
+              formError.passwordError && 
+              <span className={`${styles.formError}`}>A senha deve conter pelo menos 8 caracteres</span>
+            }
+
+            <button className={`btn btn-primary`} type="submit" onClick={(event) => handleSubmit(event)}>
               Send
             </button>
           </form>

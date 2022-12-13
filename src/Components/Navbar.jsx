@@ -63,7 +63,7 @@ const Navbar = () => {
                     localStorage.getItem('theme') === 'light' ? 'dark' : 'light'
                   )}
                 >
-                  {theme === 'dark' ? '🌙' : '☀'}
+                  {theme === 'dark' ? '☀' : '🌙'}
                 </button>
               </li>
             </ul>

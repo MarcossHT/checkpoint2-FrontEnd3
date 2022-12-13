@@ -10,8 +10,22 @@
   background-color: #31313196;
 }
 
-.formError {
-  background-color: red;
+div.formError,
+input.formError {
+  background: rgb(208, 123, 123);
+}
+
+input.formError:focus {
+  background: rgb(208, 123, 123);
+  outline: 3px solid red;
+}
+
+span.formError {
+  font-size: 12px;
+  text-align: start;
+  margin-top: 2px;
+  margin-bottom: 6px;
+  color: rgb(208, 123, 123);
 }
 
 .inputSpacing+.inputSpacing{

@@ -11,6 +11,7 @@ import "./index.css";
 import { createBrowserRouter, Navigate, RouterProvider, redirect } from "react-router-dom";
 import App from "./App";
 import {ThemeProvider} from "./hooks/useTheme";
+import { AuthProvider } from "./hooks/useAuth";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 //Lembre-se de configurar suas rotas e seu contexto aqui
@@ -50,7 +51,9 @@ root.render(
     {/* <Navbar /> */}
     {/* <Footer /> */}
     <ThemeProvider>
-    <RouterProvider router = {routerApp}/>
+      <AuthProvider>
+        <RouterProvider router = {routerApp}/>
+      </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

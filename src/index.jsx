@@ -21,7 +21,7 @@ const routerApp = createBrowserRouter([
     element: <App />,
     children: [{
       path: '',
-      element: <Navigate to='home'/>
+      loader: () => redirect('/home')
     }, 
     {
       path: 'home',
@@ -44,8 +44,6 @@ const routerApp = createBrowserRouter([
 
 root.render(
   <React.StrictMode>
-    {/* <Navbar /> */}
-    {/* <Footer /> */}
     <ThemeProvider>
       <AuthProvider>
         <RouterProvider router = {routerApp}/>

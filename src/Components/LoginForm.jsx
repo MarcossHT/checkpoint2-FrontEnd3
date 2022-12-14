@@ -9,7 +9,7 @@ import styles from "./Form.module.css";
 const LoginForm = () => {
 
   const { theme } = useTheme()
-  const { addToken } = useAuth()
+  const { saveToken } = useAuth()
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -88,7 +88,7 @@ const LoginForm = () => {
             response.json().then(
               data => {
                 // setFormError(false)
-                addToken(data.token)
+                saveToken(data.token)
                 alert('Login realizado com sucesso!')
                 navigate('/home')
               }

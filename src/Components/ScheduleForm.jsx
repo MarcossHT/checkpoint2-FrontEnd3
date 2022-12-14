@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, redirect } from 'react-router-dom'
-import './ScheduleForm.css'
+import './ScheduleForm.module.css'
 import { useTheme } from '../hooks/useTheme'
 import { useAuth } from '../hooks/useAuth'
 

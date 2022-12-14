@@ -28,22 +28,18 @@ const routerApp = createBrowserRouter([
       element: <Home />
     },
     {
-      path: 'Login',
+      path: 'login',
       element: <Login />
     },
     {
-      path: 'detail',
+      path: 'dentist/:matricula',
       element: <Detail />
     },
     {
       path: "*",
       loader: () => redirect("/home")
-    }]
-    
-
+    }]   
   }
-      
- 
 ])
 
 root.render(

@@ -4,7 +4,7 @@ import Card from "../Components/Card";
 
 const Home = () => {
 
-  const [card, setCard] = useState([])
+  const [dentists, setDentists] = useState([])
 
   useEffect(() => {
     //Nesse useEffect, deverá ser obtido todos os dentistas da API
@@ -15,7 +15,7 @@ const Home = () => {
       response => {
         response.json().then(
           data => {
-            setCard(data)
+            setDentists(data)
           }
         )
       }
@@ -28,15 +28,16 @@ const Home = () => {
       <div className="card-grid container">
 
         {
-          card.map(container => {
+          dentists.map((dentist) => {
             return (
-              <Card 
-              containerData={container}
-              />
+              // <Link to={`dentist/${dentist.matricula}`}>
+                <Card containerData={dentist} key={dentist.matricula} />
+                // {/* <Outlet /> */}
+                // {/* </Card> */}
+              // </Link>
             )
-          }
-        )
-      }
+          })
+        }
 
       </div>
     </>

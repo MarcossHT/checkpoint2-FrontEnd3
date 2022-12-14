@@ -11,6 +11,7 @@ import "./index.css";
 import { createBrowserRouter, Navigate, RouterProvider, redirect } from "react-router-dom";
 import App from "./App";
 import {ThemeProvider} from "./hooks/useTheme";
+import { AuthProvider } from "./hooks/useAuth";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 //Lembre-se de configurar suas rotas e seu contexto aqui
@@ -20,37 +21,33 @@ const routerApp = createBrowserRouter([
     element: <App />,
     children: [{
       path: '',
-      element: <Navigate to='home'/>
+      loader: () => redirect('/home')
     }, 
     {
       path: 'home',
       element: <Home />
     },
     {
-      path: 'Login',
+      path: 'login',
       element: <Login />
     },
     {
-      path: 'detail',
+      path: 'dentist/:matricula',
       element: <Detail />
     },
     {
       path: "*",
       loader: () => redirect("/home")
-    }]
-    
-
+    }]   
   }
-      
- 
 ])
 
 root.render(
   <React.StrictMode>
-    {/* <Navbar /> */}
-    {/* <Footer /> */}
     <ThemeProvider>
-    <RouterProvider router = {routerApp}/>
+      <AuthProvider>
+        <RouterProvider router = {routerApp}/>
+      </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

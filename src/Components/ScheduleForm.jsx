@@ -93,10 +93,7 @@ const ScheduleForm = () => {
         }
       })
       .then(res => {
-        const modal = document.querySelector('#exampleModal')
-
         alert('A consulta foi marcada com sucesso')
-        modal.modal('hide')
         navigate("/home");
       })
       .catch(erro => alert(erro))
@@ -200,7 +197,7 @@ const ScheduleForm = () => {
           <div className={`row rowSpacing`}>
             {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-            <button className={`btn btn-${theme} button`} type="submit">
+            <button className={`btn btn-${theme} button`} type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Agendar
             </button>
           </div>

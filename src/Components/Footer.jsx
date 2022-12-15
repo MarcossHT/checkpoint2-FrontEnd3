@@ -21,7 +21,7 @@ const Footer = () => {
                 // está em dark mode e deverá utilizar o css correto */}
                 <img className={`${styles.dhLogo} ${theme === 'dark' ? `${styles.iconsDark}` : ''}`} src="/images/DH.png" alt='DH-logo' />
               </div>
-              <div className={`col-sm-12 col-lg-6 icons ${theme === 'dark' ? 'iconsDark' : ''}`}>
+              <div className={`col-sm-12 col-lg-6 ${styles.icons} ${theme === 'dark' ? `${styles.iconsDark}` : ''}`}>
                 <img src="/images/ico-facebook.png" alt="ícone do facebook" className={styles.icon} />
                 <img src="/images/ico-instagram.png" alt="ícone do instagram" className={styles.icon} />
                 <img src="/images/ico-whatsapp.png" alt="ícone do whatsapp" className={styles.icon} />

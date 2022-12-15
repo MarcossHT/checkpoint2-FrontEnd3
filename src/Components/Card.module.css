@@ -21,3 +21,11 @@
 .title{
   height: 2rem;
 }
+
+.cardTextLight {
+  color:black;
+}
+
+.cardTextDark {
+  color: white;
+}

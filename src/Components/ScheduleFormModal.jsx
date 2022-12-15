@@ -1,5 +1,5 @@
 import ScheduleForm from './ScheduleForm'
-import './ScheduleFormModal.module.css'
+import styles from './ScheduleFormModal.module.css'
 import { useTheme } from '../hooks/useTheme'
 
 const ScheduleFormModal = () => {
@@ -16,7 +16,7 @@ const ScheduleFormModal = () => {
       <div className="modal-dialog">
         {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-        <div className={`modal-content ${theme === 'dark' ? 'DarkModal' : ''}`}>
+        <div className={`modal-content ${theme === 'dark' ? `${styles.DarkModal}` : ''}`}>
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="exampleModalLabel">
               Selecione o dentista, paciente, data e hora
@@ -26,7 +26,7 @@ const ScheduleFormModal = () => {
             <button
               type="button"
               className={`btn-close ${
-                theme === 'dark' ? 'closeButtonDark' : ''
+                theme === 'dark' ? `${styles.closeButtonDark}` : ''
               }`}
               data-bs-dismiss="modal"
               aria-label="Close"

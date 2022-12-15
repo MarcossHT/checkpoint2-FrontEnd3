@@ -40,7 +40,7 @@ const DetailCard = () => {
           <section className="card col-sm-12 col-lg-6 container">
             {/* //Na linha seguinte deverá ser feito um teste se a aplicação
             // está em dark mode e deverá utilizar o css correto */}
-          <div className={`card-body row  ${theme === 'dark' ? 'cardDark' : ''}`}>
+          <div className={`card-body row ${theme === 'dark' ? `${styles.cardDark}` : ''}`}>
               <div className="col-sm-12 col-lg-6">
                 <img
                   className="card-img-top"

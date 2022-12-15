@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   const {theme, changeTheme} = useTheme()
-  const { auth, saveToken } = useAuth()
+  const { auth, saveToken, removeToken } = useAuth()
 
   return (
     <header className="sticky-top">
@@ -18,7 +18,7 @@ const Navbar = () => {
       >
         <div className="container">
           {/* Ao clicar, o usuário deve ser redirecionado a home, com react-router */}
-          <Link to={'/home'} className={`navbar-brand navbarBrand`}>
+          <Link to={'/home'} className={`navbar-brand ${styles.navbarBrand}`}>
             DH Odonto
           </Link>
           <button
@@ -51,16 +51,17 @@ const Navbar = () => {
                 ao formulário de login
                 O botão de logout deverá ser testado darkmode
                 se sim, btn-dark, se não, btn-light */}
-                <Link to="/login" className="nav-link">
-                  Login
-                </Link>
+
                 
-                {/* {(auth === '') ? <a className="nav-link" href="/login">Login</a>
-                  :
-                  <a className="btn btn-light" href="/logout">
+                {(auth === '') ? 
+                <Link to="/login" className="nav-link">Login</Link>
+                  :            
+                  ( 
+                    <Link to="/home" className={`btn btn-${theme}`} onClick={() => removeToken()}>
                     Logout
-                  </a>
-                } */}
+                    </Link>
+                  )
+                }
 
               </li>
               <li className={`nav-item`}>

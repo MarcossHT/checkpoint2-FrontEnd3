@@ -10,7 +10,7 @@ const Card = (props) => {
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-      <div className={`card ${theme === 'dark' ? 'cardDark' : ''}`}>
+      <div className={`card ${theme === 'dark' ? `${styles.cardDark}` : ''}`}>
         <img
           className="card-img-top"
           src="/images/doctor.jpg"
@@ -21,6 +21,7 @@ const Card = (props) => {
           que vem da API */}
           <Link to={`../dentist/${props.containerData.matricula}`}>
             <h5 className={`card-title ${styles.title}`}>{props.containerData.nome} {props.containerData.sobrenome}</h5>
+            <p className={`${theme === 'dark' ? `${styles.cardTextDark}` : `${styles.cardTextLight}`}`}>{props.containerData.usuario.username}</p>
           </Link>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, redirect } from 'react-router-dom'
-import './ScheduleForm.module.css'
+import styles from './ScheduleForm.module.css'
 import { useTheme } from '../hooks/useTheme'
 import { useAuth } from '../hooks/useAuth'
 
@@ -77,7 +77,7 @@ const ScheduleForm = () => {
         } else if (res.status === 403) {
           if (auth === '') {
             throw Error(
-              'Acesso negado! Por favor logasse para pode marcar uma consulta'
+              'Acesso negado! Por favor logar-se para poder marcar uma consulta'
             )
           } else {
             saveToken({
@@ -93,7 +93,11 @@ const ScheduleForm = () => {
         }
       })
       .then(res => {
+        const modal = document.querySelector('#exampleModal')
+
         alert('A consulta foi marcada com sucesso')
+        modal.modal('hide')
+        navigate("/home");
       })
       .catch(erro => alert(erro))
   }
@@ -104,7 +108,7 @@ const ScheduleForm = () => {
         // está em dark mode e deverá utilizar o css correto */}
       <div
         className={`text-center container ${
-          theme === 'dark' ? 'cardDark' : ''
+          theme === 'dark' ? `${styles.cardDark}` : ''
         }`}
       >
         <form onSubmit={handleSubmit}>

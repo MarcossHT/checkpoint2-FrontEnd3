@@ -19,7 +19,7 @@ const Footer = () => {
               <div className="col-sm-12 col-lg-6">
                 {/* //Na linha seguinte deverá ser feito um teste se a aplicação
                 // está em dark mode e deverá utilizar o css correto */}
-                <img className={`dhLogo ${theme === 'dark' ? 'iconsDark' : ''}`} src="/images/DH.png" alt='DH-logo' />
+                <img className={`${styles.dhLogo} ${theme === 'dark' ? `${styles.iconsDark}` : ''}`} src="/images/DH.png" alt='DH-logo' />
               </div>
               <div className={`col-sm-12 col-lg-6 icons ${theme === 'dark' ? 'iconsDark' : ''}`}>
                 <img src="/images/ico-facebook.png" alt="ícone do facebook" className={styles.icon} />

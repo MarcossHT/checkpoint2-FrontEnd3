@@ -18,9 +18,15 @@ export function AuthProvider(props) {
     }
   }
 
+  function removeToken() {
+    setAuth('')
+    localStorage.removeItem('auth')
+    alert("Usuário deslogado")
+  }
+
   return (
     // Construção dos Elementos para utilizarmos o Contexto em nossa Aplicação, tudo o que for contido no "value" será exportado e poderá ser utilizado em Componentes que utilizarem o Hook Customizado "useTheme"
-    <AuthContext.Provider value={{ auth, saveToken }}>
+    <AuthContext.Provider value={{ auth, saveToken, removeToken }}>
       {props.children}
     </AuthContext.Provider>
   )
